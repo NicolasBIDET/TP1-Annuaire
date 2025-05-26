@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 
 	"github.com/NicolasBIDET/TP1-Annuaire/annuaire"
 )
@@ -19,15 +20,36 @@ func main() {
 
 	switch action {
 	case "ajouter":
-		annuaire.AjouterContact(nom, tel)
+		str, err := annuaire.AjouterContact(nom, tel)
+		if err != nil {
+			log.Fatalf("Erreur : %v\n", err)
+		} else {
+			fmt.Println(str)
+		}
 	case "modifier":
-		annuaire.MettreAJourContact(nom, tel)
+		str, err := annuaire.MettreAJourContact(nom, tel)
+		if err != nil {
+			log.Fatalf("Erreur : %v\n", err)
+		} else {
+			fmt.Println(str)
+		}
 	case "supprimer":
-		annuaire.SupprimerContact(nom)
+		str, err := annuaire.SupprimerContact(nom)
+		if err != nil {
+			log.Fatalf("Erreur : %v\n", err)
+		} else {
+			fmt.Println(str)
+		}
 	case "lister":
-		annuaire.ListerContacts()
+		str := annuaire.ListerContacts()
+		fmt.Println(str)
 	case "rechercher":
-		annuaire.RechercherContact(nom)
+		str, err := annuaire.RechercherContact(nom)
+		if err != nil {
+			log.Fatalf("Erreur : %v\n", err)
+		} else {
+			fmt.Println(str)
+		}
 	default:
 		fmt.Println("Action non reconnue")
 	}
